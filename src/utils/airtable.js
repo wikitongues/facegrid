@@ -1,4 +1,3 @@
-// src/utils/airtable.js
 import Airtable from "airtable";
 
 const base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY })
@@ -10,8 +9,8 @@ let usedSpeakerIds = new Set();
 let prefetching = false;
 
 // Configuration constants.
-const INITIAL_FETCH_COUNT = 20; // Quick load for first paint.
-const PREFETCH_COUNT = 200;       // Batch size for background prefetch.
+const INITIAL_FETCH_COUNT = 20;   // Quick load for first paint.
+const PREFETCH_COUNT = 600;       // Batch size for background prefetch.
 const MAX_RETRIES = 3;            // Maximum retry attempts for prefetching.
 const MAX_FETCH_ATTEMPTS = 3;     // Safeguard for when pool is exhausted.
 

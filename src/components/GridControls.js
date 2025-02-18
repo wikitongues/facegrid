@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { ControlsContainer, Label, Input, ColorSet, ColorInput, Button } from "./ThumbnailGrid.styled";
+import { ControlsContainer, Label, Input, ColorSet, ColorInput, Button, SettingsHeader } from "./ThumbnailGrid.styled";
 
 const presetAspectRatios = [
   { label: "16:9", value: 16/9 },
-  { label: "Square", value: 1 },
   { label: "4:3", value: 4/3 },
+  { label: "Square", value: 1 },
   { label: "Custom", value: "custom" },
 ];
 
@@ -17,11 +17,11 @@ const GridControls = ({
   setGap,
   radius,
   setRadius,
-  color,
   setColor,
   aspectRatio,
   setAspectRatio,
-  onRerollAll,
+	onLoadIdentifiers,
+	copiedIdentifier,
 }) => {
   // Local state for the custom ratio and mode.
   const [customRatio, setCustomRatio] = useState(aspectRatio);
@@ -48,8 +48,18 @@ const GridControls = ({
     }
   };
 
+	// NEW local state for pasted identifiers.
+  const [identifierList, setIdentifierList] = useState("");
+	const handleLoadIdentifiers = () => {
+    if (onLoadIdentifiers) {
+      onLoadIdentifiers(identifierList);
+    }
+  };
+
+
   return (
     <ControlsContainer>
+		<SettingsHeader>Settings</SettingsHeader>
       <Label>
         Rows:
         <Input
@@ -116,8 +126,20 @@ const GridControls = ({
           />
         ))}
       </ColorSet>
-
-      <Button onClick={onRerollAll}>Reroll All</Button>
+			<Label>Copied Identifier:</Label>
+      <textarea
+				value={copiedIdentifier}
+				readOnly
+				style={{ width: "100%", height: "100px", resize: "none" }}
+			/>
+      <Label>Load Identifiers:</Label>
+      <textarea
+        value={identifierList}
+        onChange={(e) => setIdentifierList(e.target.value)}
+        placeholder="Paste one identifier per line"
+        style={{ width: "100%", height: "100px", resize: "none" }}
+      />
+      <Button onClick={handleLoadIdentifiers}>Load Grid from Identifiers</Button>
     </ControlsContainer>
   );
 };

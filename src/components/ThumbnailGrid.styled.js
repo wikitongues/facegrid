@@ -1,47 +1,53 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 24px 0 24px 24px;
   font-family: Arial, sans-serif;
+	padding:24px;
 	background-color: ${(props) => props.$bgColor || '#101010'};
 `;
 
 export const ToggleButton = styled.button`
-  padding: 8px 12px;
-  background-color: #ccc;
+  position: fixed;
+	top:8px;
+	right:8px;
+	padding: 8px 12px;
+  color: #fffcef;
+	background-color: #3814a5;
   border: none;
   cursor: pointer;
-  margin-bottom: 16px;
+	float: right;
+	border-radius:8px;
 `;
 
 export const SidebarContainer = styled.div.attrs((props) => ({
   style: {
 	transform: props.$isOpen ? 'translateX(0)' : 'translateX(calc(100%))',
 	width: props.$isOpen ? '288px' : '0',
-	padding: props.$isOpen ? '32px' : '0',
-	// marginLeft: props.$isOpen ? '0' : '24px',
+	paddingLeft: props.$isOpen ? '32px' : '0',
+	paddingBottom: props.$isOpen ? '32px' : '0',
   },
 }))`
   height: 100%;
 	float: right;
-	margin-left: 24px;
 	box-sizing: border-box;
   background: #fffcef;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+  ${'' /* box-shadow: -2px 0 5px rgba(0,0,0,0.3); */}
   transition: all 0.3s ease;
   z-index: 1000;
   overflow-y: auto;
-  padding: 32px;
 `;
 
 export const ControlsContainer = styled.div`
 	display: flex;
-	gap: 16px;
+	gap: 4px;
 	flex-direction: column;
+	width: 100%;
+	padding-right: 32px;
+	box-sizing: border-box;
 `;
 
 export const SettingsHeader = styled.h3`
-	margin: 0;
+	margin: 16px 0;
 `;
 
 export const Label = styled.label`
@@ -51,7 +57,6 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  margin: 5px;
   padding: 8px;
   width: 50px;
 	border-width: 0 0 2px 0;
@@ -85,9 +90,15 @@ export const Button = styled.button`
 	border: none;
 `;
 
+export const RefreshButton = styled(Button)`
+	color: #fffcef;
+	background-color: #3814a5;
+	float: right;
+	margin-top:8px;
+	padding: 8px 12px;
+`;
+
 export const GridContainer = styled.div`
-	${'' /* width: 100%; */}
-	${'' /* float: left; */}
   display: grid;
   padding: ${(props) => props.$gap}px;
   background-color: ${(props) => props.$bgColor || '#101010'};
@@ -158,7 +169,7 @@ export const CopyFeedback = styled(GridElement)`
   color: #fff;
   font-size: 12px;
   pointer-events: none;
-  animation: fadeInOut 2s forwards;
+  animation: fadeInOut 1s forwards;
 
   @keyframes fadeInOut {
     0% { opacity: 0; transform: translateY(10px); }

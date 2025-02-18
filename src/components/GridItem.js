@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GridItemContainer, GridItemLinkHome, GridItemLinkCMS, GridItemText, Img, CopyFeedback } from "./ThumbnailGrid.styled";
 
-const GridItem = ({ $id, $columns, $radius, $orientation, $imageUrl, $identifier, onReroll, aspectRatio }) => {
+const GridItem = ({ $id, $columns, $radius, $orientation, $imageUrl, $identifier, onReroll, aspectRatio, onCopy }) => {
 	const airtableRecordUrl = `https://airtable.com/${process.env.REACT_APP_AIRTABLE_BASE_ID}/tblKP5UCG2Hj8ILKw/${$id}`;
   const [copied, setCopied] = useState(false);
 
@@ -9,7 +9,8 @@ const GridItem = ({ $id, $columns, $radius, $orientation, $imageUrl, $identifier
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds.
+			if (onCopy) onCopy(text);
+      setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       console.error("Failed to copy:", error);
     }
@@ -19,12 +20,11 @@ const GridItem = ({ $id, $columns, $radius, $orientation, $imageUrl, $identifier
 		<GridItemContainer key={$id}
 			$imageUrl={$imageUrl}
 			onClick={onReroll}
-			// title={$identifier}
 			title="Click to load a new thumbnail"
 			$columns={$columns}
 			$radius={$radius}
 			$orientation={$orientation}
-			$aspectRatio={aspectRatio}  // Transient prop for aspect ratio
+			$aspectRatio={aspectRatio}
 			>
 			<GridItemLinkHome
 				href={`https://wikitongues.org/videos/${$identifier}`}
@@ -48,7 +48,7 @@ const GridItem = ({ $id, $columns, $radius, $orientation, $imageUrl, $identifier
 					}}>
 				{$identifier}
 			</GridItemText>
-			{copied && <CopyFeedback>Copied!</CopyFeedback>}
+			{copied && <CopyFeedback>Copied to clipboard!</CopyFeedback>}
 		</GridItemContainer>
 	)
 };
