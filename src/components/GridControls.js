@@ -58,11 +58,12 @@ const GridControls = ({
 
 
   return (
-    <ControlsContainer>
+    <ControlsContainer id="settings" name="settings">
 		<SettingsHeader>Settings</SettingsHeader>
       <Label>
         Rows:
         <Input
+          name="rows"
           type="number"
           value={rows}
           onChange={(e) => setRows(Number(e.target.value))}
@@ -71,6 +72,7 @@ const GridControls = ({
       <Label>
         Columns:
         <Input
+          name="columns"
           type="number"
           value={columns}
           onChange={(e) => setColumns(Number(e.target.value))}
@@ -79,6 +81,7 @@ const GridControls = ({
       <Label>
         Gap (px):
         <Input
+          name="gap"
           type="number"
           value={gap}
           onChange={(e) => setGap(Number(e.target.value))}
@@ -88,14 +91,19 @@ const GridControls = ({
       <Label>
         Border Radius (px):
         <Input
+          name="radius"
           type="number"
           value={radius}
           onChange={(e) => setRadius(Number(e.target.value))}
           step="1"
         />
       </Label>
-			<Label>Aspect Ratio:</Label>
-      <select onChange={handleAspectChange} value={aspectMode === "custom" ? "custom" : String(aspectRatio)}>
+			<Label htmlFor="aspectRatio">Aspect Ratio:</Label>
+      <select
+        name="aspectRatio"
+        id="aspectRatio"
+        onChange={handleAspectChange}
+        value={aspectMode === "custom" ? "custom" : String(aspectRatio)}>
         {presetAspectRatios.map((preset) => (
           <option key={preset.label} value={preset.value}>
             {preset.label}
@@ -104,6 +112,7 @@ const GridControls = ({
       </select>
       {aspectMode === "custom" && (
         <Input
+          name="customRatio"
           type="number"
           value={customRatio}
           onChange={(e) => {
@@ -116,24 +125,30 @@ const GridControls = ({
           placeholder="Enter ratio (e.g., 1.5)"
         />
       )}
-      <Label>Grid Color:</Label>
+      <Label htmlFor="color">Grid Color:</Label>
       <ColorSet>
         {["#101010", "#fffcef", "#e52600", "#ffff00", "#3814a5"].map((preset) => (
           <ColorInput
+            name="color"
+            id="color"
             key={preset}
             onClick={() => setColor(preset)}
             title={preset}
           />
         ))}
       </ColorSet>
-			<Label>Copied Identifier:</Label>
+			<Label htmlFor="copiedIdentifier">Copied Identifier:</Label>
       <textarea
+        name="copiedIdentifier"
+        id="copiedIdentifier"
 				value={copiedIdentifier}
 				readOnly
 				style={{ width: "100%", height: "100px", resize: "none" }}
 			/>
-      <Label>Load Identifiers:</Label>
+      <Label htmlFor="identifierList">Load Identifiers:</Label>
       <textarea
+        name="identifierList"
+        id="identifierList"
         value={identifierList}
         onChange={(e) => setIdentifierList(e.target.value)}
         placeholder="Paste one identifier per line"

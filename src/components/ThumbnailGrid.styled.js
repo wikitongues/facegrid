@@ -37,7 +37,7 @@ export const SidebarContainer = styled.div.attrs((props) => ({
   overflow-y: auto;
 `;
 
-export const ControlsContainer = styled.div`
+export const ControlsContainer = styled.form`
 	display: flex;
 	gap: 4px;
 	flex-direction: column;
@@ -70,7 +70,7 @@ export const ColorSet = styled.div`
 	gap: 8px;
 `;
 
-export const ColorInput = styled.div`
+export const ColorInput = styled.button`
   width: 50px;
   border: none;
 	background-color: ${(props)=>props.title } ;

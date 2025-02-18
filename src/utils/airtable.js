@@ -19,7 +19,7 @@ async function fetchRecordsFromAirtable(maxRecords) {
   const records = [];
   await base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
     .select({
-      view: "fred temp",
+      view: process.env.REACT_APP_AIRTABLE_VIEW_NAME,
       filterByFormula: "AND({public_status} = 'Public', {Raw Thumbnail} != '')",
       maxRecords: maxRecords,
     })

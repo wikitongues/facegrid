@@ -7,7 +7,7 @@ export async function fetchIndex() {
   const records = [];
   await base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
     .select({
-      view: "fred temp", // a view optimized to return minimal fields
+      view: process.env.REACT_APP_AIRTABLE_VIEW_NAME, // a view optimized to return minimal fields
       fields: ["speaker_id", "Identifier"],
     })
     .eachPage((recordsPage, fetchNextPage) => {

@@ -11,7 +11,7 @@ export async function fetchFullRecordsByIds(identifiers) {
   const records = [];
   await base(process.env.REACT_APP_AIRTABLE_TABLE_NAME)
     .select({
-      view: "fred temp",
+      view: process.env.REACT_APP_AIRTABLE_VIEW_NAME,
       filterByFormula: formula,
     })
     .eachPage((recordsPage, fetchNextPage) => {

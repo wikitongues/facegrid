@@ -31,14 +31,14 @@ const GridItem = ({ $id, $columns, $radius, $orientation, $imageUrl, $identifier
 				onClick={(e) => e.stopPropagation()}
 				title="Watch on Wikitongues.org"
 				>
-				<Img src="WT LogoMark-Wht.svg" alt="WT Logo" />
+				<Img src={`${process.env.PUBLIC_URL}/Logo_Wikitongues.svg`} alt="WT Logo" />
 			</GridItemLinkHome>
 			<GridItemLinkCMS
 				href={airtableRecordUrl}
 				onClick={(e) => e.stopPropagation()}
 				title="Edit in Airtable"
 				>
-				<Img src="Airtable_logo 1.svg" alt="WT Logo" />
+				<Img src={`${process.env.PUBLIC_URL}/Logo_Airtable.svg`} alt="Airtable Logo" />
 			</GridItemLinkCMS>
 			<GridItemText
 				title="Click to copy to clipboard"
